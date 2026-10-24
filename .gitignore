@@ -1,0 +1,27 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+.venv/
+venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# 运行时可再生目录（重跑会重新生成）
+cache/
+logs/
+*.log
+
+# SQLite 临时文件
+*.db-wal
+*.db-shm
+
+# IDE / 工具
+.codebuddy/
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db

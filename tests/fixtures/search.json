@@ -1,0 +1,7 @@
+{
+  "data": [
+    {"date": "20261024", "from_station": "北京南", "to_station": "上海虹桥", "station_train_code": "G1", "total_num": "7", "train_no": "24000000G10L"},
+    {"date": "20261024", "from_station": "上海虹桥", "to_station": "北京南", "station_train_code": "G10", "total_num": "9", "train_no": "5l00000G1010"},
+    {"date": "20261024", "from_station": "北京南", "to_station": "上海虹桥", "station_train_code": "G11", "total_num": "5", "train_no": "2400000G110Q"}
+  ]
+}

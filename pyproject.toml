@@ -1,0 +1,26 @@
+[project]
+name = "rail-china-crawl"
+version = "0.1.0"
+description = "12306 全量车次 / 逐站时刻表抓取与导出工具"
+requires-python = ">=3.11"
+authors = [{ name = "AFewMoon" }]
+license = "GPL-3.0-or-later"
+license-files = ["LICENSE"]
+dependencies = [
+    "httpx>=0.27",
+    "tqdm>=4.66",
+    "PyYAML>=6.0",
+    "beautifulsoup4>=4.12",
+    "lxml>=5.0",
+]
+
+[project.scripts]
+rail = "rail.cli:main"
+
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+package-dir = { "" = "src" }
+packages = ["rail", "rail.providers"]

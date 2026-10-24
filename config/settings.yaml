@@ -1,0 +1,44 @@
+# 运行配置。日期为 null 时使用当天（12306 仅提供预售期内车次）。
+date: null
+
+http:
+  # 全局令牌桶限速（对 kyfw.12306.cn 生效）；实测 2 req/s 会触发 403，默认 1 req/s
+  rate_per_sec: 1.3
+  burst: 1
+  # search.12306.cn 风控更严格（约 40 次快速请求即 403），单独限速
+  search_rate_per_sec: 0.35
+  # 并发请求数；fetch 在线程池中执行，写库在主线程串行完成
+  workers: 3
+  timeout: 25.0
+  max_attempts: 5
+  backoff_base: 1.6
+  # 连续被风控拦截 5 次后整体冷却多久（分钟）
+  pause_minutes: 5
+  cache: true
+  user_agent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36"
+  # 第三方站点走本机代理；12306 直连。留空则全部直连，也可用环境变量 RAIL_PROXY 覆盖
+  proxy: "http://127.0.0.1:7890"
+
+paths:
+  db: output/rail.db
+  cache: cache/http
+  raw: output/raw
+  csv: output/csv
+  log: logs/rail.log
+
+crawl:
+  # 枚举根前缀：字母线路 + 纯数字普速车次
+  roots: ["G", "D", "C", "Z", "T", "K", "S", "Y", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
+  # 搜索接口单次返回上限，达到该值即认为被截断，需要继续细分前缀
+  search_cap: 200
+  # 前缀最大长度（字母 + 4 位数字）
+  max_prefix_len: 5
+
+enrich:
+  # 第三方补全 provider，按顺序尝试；失败自动跳过
+  # gaotie_com = www.gaotie.com.cn（旧域名 gaotie.cn 已停站）
+  providers: ["gaotie_com"]
+  provider_rate_per_sec: 2.0
+  provider_timeout: 20.0
+  # 车型未知时，按车次等级推断卧铺/餐车/空调等布尔特征（不推断编组辆数与定员）
+  enable_class_rules: true

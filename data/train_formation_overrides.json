@@ -1,0 +1,4 @@
+{
+  "_comment": "人工校正表：按车次号覆盖车型与编组，优先级最高（source=override, confidence=0.95）。示例：\"G1\": {\"train_type\": \"CR400AF-BZ\"}",
+  "trains": {}
+}

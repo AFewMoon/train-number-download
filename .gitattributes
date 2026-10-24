@@ -1,0 +1,15 @@
+* text=auto
+
+LICENSE text eol=lf
+*.py    text eol=lf
+*.md    text eol=lf
+*.yaml  text eol=lf
+*.yml   text eol=lf
+*.toml  text eol=lf
+*.txt   text eol=lf
+
+# 数据快照：保持字节原样，禁止行尾转换（CSV 带 UTF-8 BOM）
+*.csv   -text
+*.jsonl -text
+*.db    -text
+*.json  -text
